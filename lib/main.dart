@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:shoes_app/src/pages/shoes_page.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -7,18 +9,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'ShoesApp',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Shoe Sales'),
-          centerTitle: true,
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hola Mundo'),
-          ),
-        ),
-      ),
+      title: 'Shoes App',
+      home: ShoesPage(),
     );
   }
 }
