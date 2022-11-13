@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+
+  final String texto;
+
+  const CustomAppBar({
+    required this.texto
+    });
 
   @override
   Widget build(BuildContext context) {
+
+
     return SafeArea(
       top: true,
       bottom: false,
@@ -15,7 +22,7 @@ class CustomAppBar extends StatelessWidget {
         width: double.infinity,
         child: Row(
           children: [
-            Text('For you',
+            Text(texto,
              style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.w600,
@@ -32,8 +39,6 @@ class CustomAppBar extends StatelessWidget {
               onPressed: (){}, 
               icon: Icon(Icons.search)
               ),
-
-              
           ],
         ),
       ),
