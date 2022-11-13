@@ -96,12 +96,12 @@ class _ZapatoTalla extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
 
-          _CajaTallaZapato( talla: 7),
-          _CajaTallaZapato( talla: 7.5),
-          _CajaTallaZapato( talla: 8),
-          _CajaTallaZapato( talla: 8.5),
-          _CajaTallaZapato( talla: 9),
-          _CajaTallaZapato( talla: 9.5),
+          _CajaTallaZapato( talla: 7, tallaSeleccionada: false),
+          _CajaTallaZapato( talla: 7.5, tallaSeleccionada: false),
+          _CajaTallaZapato( talla: 8, tallaSeleccionada: false),
+          _CajaTallaZapato( talla: 8.5, tallaSeleccionada: false),
+          _CajaTallaZapato( talla: 9, tallaSeleccionada: true),
+          _CajaTallaZapato( talla: 9.5, tallaSeleccionada: false),
         ],
       ),
     );
@@ -112,9 +112,12 @@ class _ZapatoTalla extends StatelessWidget {
 class _CajaTallaZapato extends StatelessWidget {
 
   final double talla;
+
+  final bool tallaSeleccionada; 
   
   const _CajaTallaZapato({
     required this.talla,
+    required this.tallaSeleccionada,
   });
 
   @override
@@ -126,13 +129,22 @@ class _CajaTallaZapato extends StatelessWidget {
         width: 45,
         height: 45,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10)  
+          color: (tallaSeleccionada) ? Color(0xffF1A23A) : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: (tallaSeleccionada) ? Color(0xffF1A23A) : Colors.transparent, 
+              blurRadius: (tallaSeleccionada) ? 20 : 0,
+              offset: Offset(0, 5)
+              
+              
+            )
+          ]
         ),
         child: Text('$talla'.toString().replaceAll('.0', ''), 
           style: TextStyle(
-            color: Color(0xffF1A23A),
-            fontSize: 17,
+            color: (tallaSeleccionada) ? Colors.white : Color(0xffF1A23A),
+            fontSize: 16,
             fontWeight: FontWeight.bold
           ),
         ),
