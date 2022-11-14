@@ -22,11 +22,75 @@ class ShoesDescriptionPage extends StatelessWidget {
               SizedBox(height: 20),
 
               _MontoBuyNow(),
+
+              SizedBox( height: 20 ),
+
+              _ColorsAndMore(color: Colors.orange,),
             ],
           ),
         )),
       ],
     ));
+  }
+}
+
+class _ColorsAndMore extends StatelessWidget {
+
+  final Color color;
+  
+  const _ColorsAndMore({
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric( horizontal: 20 ),
+      child: Row(
+        children: [
+
+          Expanded(
+            child: Stack(
+              children: [
+
+                Positioned(left: 90, child: _BotonColor(color: Color(0xffC6D642)) ),
+                Positioned(left: 60, child: _BotonColor(color: Color(0xffFFAD29)) ),
+                Positioned(left: 30, child: _BotonColor(color: Color(0xff2099F1)) ),
+                _BotonColor(color: Color(0xff364D56)),
+              ],
+            )
+            ),
+ 
+
+          OrangeButton(
+            texto: 'More related items', 
+            buttonWidth: 170, 
+            buttonHeight: 30, 
+            buttonColor: Color(0xffFFC675))
+        ],
+      ),
+    );
+  }
+}
+
+class _BotonColor extends StatelessWidget {
+  const _BotonColor({
+    Key? key,
+    required this.color,
+  }) : super(key: key);
+
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 45,
+      height: 45,
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle
+      ),
+    );
   }
 }
 
