@@ -11,23 +11,40 @@ class ShoesPage extends StatelessWidget {
     return Scaffold(
       //body: CustomAppBar(),
       //body: ZapatoSizePreview(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomAppBar(
-              texto: 'For you',
-            ),
-      
-            ZapatoSizePreview(),
-      
-            ZapatoDescripcion(
+      body: Column(
+        children: [
+          const CustomAppBar(
+            texto: 'For you',
+          ),
+
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: const [
+
+                  ZapatoSizePreview(),
+
+                  ZapatoDescripcion(
+                    
+                    titulo: 'Nike Air Max 720',
+                    descripcion: "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.",
               
-              titulo: 'Nike Air Max 720',
-              descripcion: "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.",
-      
+                  ),
+                  ZapatoDescripcion(
+                    
+                    titulo: 'Nike Air Max 720',
+                    descripcion: "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.",
+              
+                  ),
+
+                  SizedBox( height: 20.0), 
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+
+      const ZapatoPriceCart( monto: 180),
+        ],
       ),
     );
   }
