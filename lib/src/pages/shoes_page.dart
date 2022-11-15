@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_app/src/pages/shoes_description_page.dart';
 
 import 'package:shoes_app/src/widgets/custom_widgets.dart';
 
@@ -20,9 +21,18 @@ class ShoesPage extends StatelessWidget {
           Expanded(
             child: SingleChildScrollView(
               child: Column(
-                children: const [
+                children: [
 
-                  ZapatoSizePreview(),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ShoesDescriptionPage())
+                      );
+                    },
+                    child: Hero(
+                      tag: 'Animation-1',
+                      child: ZapatoSizePreview()
+                      )
+                    ),
 
                   ZapatoDescripcion(
                     
