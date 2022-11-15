@@ -9,23 +9,55 @@ class ShoesDescriptionPage extends StatelessWidget {
     return Scaffold(
         body: Column(
       children: [
-        const ZapatoSizePreview(fullScreen: true),
+
+
+        Stack(
+          children: [
+
+            ZapatoSizePreview(fullScreen: true),
+
+            Positioned(
+              top: 80,
+              child: FloatingActionButton(
+                onPressed: (){},
+                child: Icon( 
+                  Icons.chevron_left, 
+                  size: 40, 
+                  color: Colors.white
+                  ),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                highlightElevation: 0,
+                hoverElevation: 0,
+                ),
+            )
+
+          ],
+        ),
+
+
         Expanded(
             child: SingleChildScrollView(
           child: Column(
             children: [
+
               ZapatoDescripcion(
                 titulo: 'Nike Air Max 720',
                 descripcion:
                     "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.",
               ),
+
               SizedBox(height: 20),
 
               _MontoBuyNow(),
 
               SizedBox( height: 20 ),
 
-              _ColorsAndMore(color: Colors.orange,),
+              _ColorsAndMore(),
+
+              _ShadedButton(),
+
+              SizedBox( height: 30.0,)
             ],
           ),
         )),
@@ -34,14 +66,62 @@ class ShoesDescriptionPage extends StatelessWidget {
   }
 }
 
-class _ColorsAndMore extends StatelessWidget {
+class _ShadedButton extends StatelessWidget {
 
-  final Color color;
-  
-  const _ColorsAndMore({
-    required this.color,
+  const _ShadedButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      margin: EdgeInsets.only( top: 30),
+      padding: EdgeInsets.symmetric( horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          
+          _LikeCartSettingButtons(icon: Icon( Icons.star, color: Colors.red,) ),
+          _LikeCartSettingButtons(icon: Icon(Icons.shopping_cart, color: Colors.grey.withOpacity(0.3),)),
+          _LikeCartSettingButtons(icon: Icon(Icons.settings, color: Colors.grey.withOpacity(0.3))),
+        ],
+      ),
+    );
+  }
+}
+
+class _LikeCartSettingButtons extends StatelessWidget {
+
+  final Icon icon;
+  const _LikeCartSettingButtons({
+    required this.icon,
   });
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 45,
+      height: 45,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            spreadRadius: 4,
+            blurRadius: 20,
+            offset: Offset(-5, 10)
+          )
+        ]
+      ),
+      child: icon,
+    );
+  }
+}
+
+class _ColorsAndMore extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -74,12 +154,13 @@ class _ColorsAndMore extends StatelessWidget {
 }
 
 class _BotonColor extends StatelessWidget {
-  const _BotonColor({
-    Key? key,
-    required this.color,
-  }) : super(key: key);
-
+  
   final Color color;
+
+  const _BotonColor({
+    required this.color,
+  });
+
 
   @override
   Widget build(BuildContext context) {
