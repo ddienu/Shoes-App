@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:shoes_app/src/models/zapato_model.dart';
+
 
 class ZapatoSizePreview extends StatelessWidget {
 
@@ -106,12 +110,12 @@ class _ZapatoTalla extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
 
-          _CajaTallaZapato( talla: 7, tallaSeleccionada: false),
-          _CajaTallaZapato( talla: 7.5, tallaSeleccionada: false),
-          _CajaTallaZapato( talla: 8, tallaSeleccionada: false),
-          _CajaTallaZapato( talla: 8.5, tallaSeleccionada: false),
-          _CajaTallaZapato( talla: 9, tallaSeleccionada: true),
-          _CajaTallaZapato( talla: 9.5, tallaSeleccionada: false),
+          _CajaTallaZapato( talla: 7),
+          _CajaTallaZapato( talla: 7.5),
+          _CajaTallaZapato( talla: 8),
+          _CajaTallaZapato( talla: 8.5),
+          _CajaTallaZapato( talla: 9),
+          _CajaTallaZapato( talla: 9.5),
         ],
       ),
     );
@@ -123,39 +127,47 @@ class _CajaTallaZapato extends StatelessWidget {
 
   final double talla;
 
-  final bool tallaSeleccionada; 
   
   const _CajaTallaZapato({
     required this.talla,
-    required this.tallaSeleccionada,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: Container(
-        alignment: Alignment.center,
-        width: 45,
-        height: 45,
-        decoration: BoxDecoration(
-          color: (tallaSeleccionada) ? Color(0xffF1A23A) : Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: (tallaSeleccionada) ? Color(0xffF1A23A) : Colors.transparent, 
-              blurRadius: (tallaSeleccionada) ? 20 : 0,
-              offset: Offset(0, 5)
-              
-              
-            )
-          ]
-        ),
-        child: Text('$talla'.toString().replaceAll('.0', ''), 
-          style: TextStyle(
-            color: (tallaSeleccionada) ? Colors.white : Color(0xffF1A23A),
-            fontSize: 16,
-            fontWeight: FontWeight.bold
+
+    final zapatoModel = Provider.of<ZapatoModel>(context);
+
+    return GestureDetector(
+      onTap: () {
+        final zapatoModel = Provider.of<ZapatoModel>(context, listen: false);
+
+        zapatoModel.talla = talla;
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 40),
+        child: Container(
+          alignment: Alignment.center,
+          width: 45,
+          height: 45,
+          decoration: BoxDecoration(
+            color: (zapatoModel.talla == talla ) ? Color(0xffF1A23A) : Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: (zapatoModel.talla == talla) ? Color(0xffF1A23A) : Colors.transparent, 
+                blurRadius: (zapatoModel.talla == talla) ? 20 : 0,
+                offset: Offset(0, 5)
+                
+                
+              )
+            ]
+          ),
+          child: Text('$talla'.toString().replaceAll('.0', ''), 
+            style: TextStyle(
+              color: (zapatoModel.talla == talla) ? Colors.white : Color(0xffF1A23A),
+              fontSize: 16,
+              fontWeight: FontWeight.bold
+            ),
           ),
         ),
       ),
