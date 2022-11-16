@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes_app/src/models/zapato_model.dart';
 import 'package:shoes_app/src/widgets/custom_widgets.dart';
 
 class ShoesDescriptionPage extends StatelessWidget {
@@ -85,7 +87,7 @@ class _ShadedButton extends StatelessWidget {
       margin: EdgeInsets.only( top: 30),
       padding: EdgeInsets.symmetric( horizontal: 20),
       child: Bounce(
-        delay: Duration( milliseconds: 1500),
+        delay: Duration( milliseconds: 200),
         from: 10,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -143,10 +145,10 @@ class _ColorsAndMore extends StatelessWidget {
             child: Stack(
               children: [
 
-                Positioned(left: 90, child: _BotonColor(color: Color(0xffC6D642), index: 4) ),
-                Positioned(left: 60, child: _BotonColor(color: Color(0xffFFAD29), index: 3) ),
-                Positioned(left: 30, child: _BotonColor(color: Color(0xff2099F1), index: 2,) ),
-                _BotonColor(color: Color(0xff364D56,), index: 1,),
+                Positioned(left: 90, child: _BotonColor(color: Color(0xffC6D642), index: 4, urlAsset: 'assets/imgs/verde.png') ),
+                Positioned(left: 60, child: _BotonColor(color: Color(0xffFFAD29), index: 3, urlAsset: 'assets/imgs/amarillo.png') ),
+                Positioned(left: 30, child: _BotonColor(color: Color(0xff2099F1), index: 2, urlAsset: 'assets/imgs/azul.png') ),
+                _BotonColor(color: Color(0xff364D56,), index: 1, urlAsset: 'assets/imgs/negro.png'),
               ],
             )
             ),
@@ -167,23 +169,33 @@ class _BotonColor extends StatelessWidget {
   
   final Color color;
   final int index;
+  final String urlAsset;
 
   const _BotonColor({
     required this.color, 
     required this.index,
+    required this.urlAsset,
   });
 
 
   @override
   Widget build(BuildContext context) {
+    
+    final zapatoModel = Provider.of<ZapatoModel>(context);
+
     return FadeInLeft(
       delay: Duration(milliseconds: index * 100),
-      child: Container(
-        width: 45,
-        height: 45,
-        decoration: BoxDecoration(
-          color: color,
-          shape: BoxShape.circle
+      child: GestureDetector(
+        onTap: (){
+          zapatoModel.assetImage = urlAsset;
+        },
+        child: Container(
+          width: 45,
+          height: 45,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle
+          ),
         ),
       ),
     );

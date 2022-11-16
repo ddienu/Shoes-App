@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-
 import 'package:shoes_app/src/models/zapato_model.dart';
 
 
@@ -45,11 +44,31 @@ class ZapatoSizePreview extends StatelessWidget {
   }
 }
 
-class _ZapatoConSombra extends StatelessWidget {
+class _ZapatoConSombra extends StatefulWidget {
   const _ZapatoConSombra({Key? key}) : super(key: key);
 
   @override
+  State<_ZapatoConSombra> createState() => _ZapatoConSombraState();
+}
+
+class _ZapatoConSombraState extends State<_ZapatoConSombra> {
+
+  final imagenes = [
+    const AssetImage('assets/imgs/amarillo.png'),
+    const AssetImage('assets/imgs/azul.png'),
+    const AssetImage('assets/imgs/negro.png'),
+    const AssetImage('assets/imgs/verde.png'),
+  ];
+  @override
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    List.generate(imagenes.length, (index) => precacheImage(imagenes[index], context));
+  }
   Widget build(BuildContext context) {
+
+    final zapatoModel = Provider.of<ZapatoModel>(context);
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(50),
@@ -63,7 +82,7 @@ class _ZapatoConSombra extends StatelessWidget {
               ),
       
             Image(
-              image: AssetImage('assets/imgs/azul.png')
+              image: AssetImage( zapatoModel.assetImage )
               ),
           ],
         ),
